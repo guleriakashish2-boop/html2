@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HIET Smart Campus</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+    --primary-green: #15a854;
+    --primary-green-dark: #0e8c43;
+    --bg-page: #f4f6fb;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #64748b;
+    --border-radius-card: 24px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #eef2f7;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Mobile-First App Wrapper */
+.app-container {
+    width: 100%;
+    max-width: 440px;
+    background: var(--bg-page);
+    min-height: 100vh;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Top Sticky Header */
+.top-header {
+    background: var(--primary-green);
+    padding: 16px 18px 24px;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 6px 18px rgba(21, 168, 84, 0.25);
+}
+
+.search-bar-wrap {
+    background: #ffffff;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    padding: 4px 16px 4px 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.search-bar-wrap input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #334155;
+    flex: 1;
+    padding: 12px 0;
+}
+
+.search-bar-wrap input::placeholder {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.mic-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 19px;
+    color: #64748b;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.mic-btn:active {
+    transform: scale(0.9);
+    color: var(--primary-green);
+}
+
+/* Content Area */
+.content-body {
+    flex: 1;
+    padding: 16px 16px 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Module Category Section Cards */
+.module-group {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    padding: 22px 18px 20px;
+    box-shadow: 0 3px 12px rgba(100, 116, 139, 0.05);
+}
+
+.module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    letter-spacing: -0.2px;
+}
+
+/* 3-Column Grid like the app */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 22px;
+    column-gap: 12px;
+}
+
+.item-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: transform 0.15s ease;
+}
+
+.item-box:active {
+    transform: scale(0.93);
+}
+
+.icon-wrapper {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+/* Soft Icon Background Colors */
+.bg-rose     { background: #ffe4e6; color: #f43f5e; }
+.bg-amber    { background: #fef3c7; color: #d97706; }
+.bg-indigo   { background: #e0e7ff; color: #4f46e5; }
+.bg-teal     { background: #ccfbf1; color: #0d9488; }
+.bg-emerald  { background: #d1fae5; color: #059669; }
+.bg-blue     { background: #dbeafe; color: #2563eb; }
+.bg-purple   { background: #f3e8ff; color: #9333ea; }
+.bg-sky      { background: #e0f2fe; color: #0284c7; }
+.bg-red      { background: #fee2e2; color: #dc2626; }
+.bg-orange   { background: #ffedd5; color: #ea580c; }
+
+.item-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #334155;
+    line-height: 1.25;
+    max-width: 90px;
+}
+
+/* Bottom Nav Bar */
+.bottom-nav {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 8px 12px;
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid #edf2f7;
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: var(--primary-green);
+}
+
+.module-tab-btn {
+    background: #e8f7ee;
+    padding: 5px 12px;
+    border-radius: 14px;
+    color: var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+/* Interactive Popups / Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: 28px 28px 0 0;
+    padding: 24px;
+    animation: slideUp 0.25s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.close-btn {
+    background: #f1f5f9;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    color: #64748b;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    background: var(--primary-green);
+    color: white;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- Top Green Bar with Search -->
+    <header class="top-header">
+        <div class="search-bar-wrap">
+            <input type="text" id="searchInput" placeholder="Looking for..." onkeypress="handleSearch(event)">
+            <button class="mic-btn" onclick="startVoice()"><i class="fa-solid fa-microphone"></i></button>
+        </div>
+    </header>
+
+    <!-- Main Module Groups -->
+    <main class="content-body">
+
+        <!-- Communication -->
+        <section class="module-group">
+            <h2 class="module-title">Communication</h2>
+            <div class="item-grid">
+                <button class="item-box" onclick="showModal('Academic Calendar', 'Check term schedules, holidays, and semester breaks.')">
+                    <div class="icon-wrapper bg-rose"><i class="fa-regular fa-calendar-days"></i></div>
+                    <span class="item-label">Calendar</span>
+                </button>
+                <button class="item-box" onclick="showModal('Campus Circulars', 'Official notifications from Principal and Dean Office.')">
+                    <div class="icon-wrapper bg-amber"><i class="fa-regular fa-envelope-open"></i></div>
+                    <span class="item-label">Circular</span>
+                </button>
+                <button class="item-box" onclick="openFeedback()">
+                    <div class="icon-wrapper bg-indigo"><i class="fa-regular fa-comment-dots"></i></div>
+                    <span class="item-label">Feedback</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Academics -->
+        <section class="module-group">
+            <h2 class="module-title">Academics</h2>
+            <div class="item-grid">
+                <button class="item-box" onclick="showModal('Attendance Tracker', 'Overall attendance: 84%. No shortage reported.')">
+                    <div class="icon-wrapper bg-emerald"><i class="fa-solid fa-clipboard-user"></i></div>
+                    <span class="item-label">Attendance</span>
+                </button>
+                <button class="item-box" onclick="showModal('Home Work / Assignments', '2 Assignments due this Friday.')">
+                    <div class="icon-wrapper bg-rose"><i class="fa-solid fa-pen-nib"></i></div>
+                    <span class="item-label">Home Work</span>
+                </button>
+                <button class="item-box" onclick="showModal('Class Time Table', 'Current batch: CSE 3rd Year (Section A).')">
+                    <div class="icon-wrapper bg-sky"><i class="fa-regular fa-clock"></i></div>
+                    <span class="item-label">Time Table</span>
+                </button>
+                <button class="item-box" onclick="showModal('Examination Schedule', 'Mid-Term Examinations commence next month.')">
+                    <div class="icon-wrapper bg-purple"><i class="fa-solid fa-file-signature"></i></div>
+                    <span class="item-label">Exam Schedule</span>
+                </button>
+                <button class="item-box" onclick="showModal('Result Sheet', 'Semester-end results & SGPA calculator.')">
+                    <div class="icon-wrapper bg-teal"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                    <span class="item-label">Result</span>
+                </button>
+                <button class="item-box" onclick="showModal('eContent & Digital Library', 'Access lecture notes, PDFs, and NPTEL modules.')">
+                    <div class="icon-wrapper bg-blue"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <span class="item-label">eContent</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="module-group">
+            <h2 class="module-title">Services</h2>
+            <div class="item-grid">
+                <button class="item-box" onclick="showModal('Tuition & Hostel Fees', 'No outstanding dues. Receipt available for download.')">
+                    <div class="icon-wrapper bg-purple"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <span class="item-label">Fees</span>
+                </button>
+                <button class="item-box" onclick="showModal('College Bus & Route Info', 'Bus No. 12 on route Kangra - Dharamshala - Campus.')">
+                    <div class="icon-wrapper bg-teal"><i class="fa-solid fa-route"></i></div>
+                    <span class="item-label">Route Info</span>
+                </button>
+                <button class="item-box" onclick="openComplaintModal()">
+                    <div class="icon-wrapper bg-blue"><i class="fa-solid fa-laptop-file"></i></div>
+                    <span class="item-label">Digital Form</span>
+                </button>
+                <button class="item-box" onclick="showModal('Student TimeSheet', 'Log campus lab hours and training hours.')">
+                    <div class="icon-wrapper bg-sky"><i class="fa-regular fa-calendar-check"></i></div>
+                    <span class="item-label">Student TimeSheet</span>
+                </button>
+                <button class="item-box" onclick="openLostModal()">
+                    <div class="icon-wrapper bg-amber"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <span class="item-label">Lost & Found</span>
+                </button>
+                <button class="item-box" onclick="triggerSOS()">
+                    <div class="icon-wrapper bg-red"><i class="fa-solid fa-bell-exclamation"></i></div>
+                    <span class="item-label" style="color:#dc2626; font-weight:700;">SOS Help</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Social Media & Activities -->
+        <section class="module-group">
+            <h2 class="module-title">Social Media & Campus Life</h2>
+            <div class="item-grid">
+                <button class="item-box" onclick="showModal('Campus Video Gallery', 'Highlights of Annual Cultural & Tech Fest.')">
+                    <div class="icon-wrapper bg-red"><i class="fa-solid fa-circle-play"></i></div>
+                    <span class="item-label">Video</span>
+                </button>
+                <button class="item-box" onclick="showModal('Club & Sports Activity', 'NCC, NSS and Coding Club activities.')">
+                    <div class="icon-wrapper bg-orange"><i class="fa-solid fa-guitar"></i></div>
+                    <span class="item-label">Activity</span>
+                </button>
+                <button class="item-box" onclick="showModal('College News', 'HIET students win Smart India Hackathon.')">
+                    <div class="icon-wrapper bg-blue"><i class="fa-solid fa-newspaper"></i></div>
+                    <span class="item-label">News</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom App Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-item active">
+            <div class="module-tab-btn"><i class="fa-solid fa-layer-group"></i></div>
+            <span>Module</span>
+        </button>
+        <button class="nav-item" onclick="showModal('Notifications', 'No new unread messages.')">
+            <i class="fa-regular fa-bell" style="font-size:18px"></i>
+            <span>Notification</span>
+        </button>
+        <button class="nav-item" onclick="showModal('My View', 'Student custom dashboard.')">
+            <i class="fa-solid fa-house-chimney" style="font-size:18px"></i>
+            <span>My View</span>
+        </button>
+        <button class="nav-item" onclick="showModal('Student Profile', 'Roll: 22CSE041 | B.Tech CSE')">
+            <i class="fa-regular fa-user" style="font-size:18px"></i>
+            <span>Profile</span>
+        </button>
+        <button class="nav-item" onclick="showModal('Settings', 'App language, dark mode and preferences.')">
+            <i class="fa-solid fa-gear" style="font-size:18px"></i>
+            <span>Settings</span>
+        </button>
+    </nav>
+
+</div>
+
+<!-- General Interactive Modal -->
+<div class="modal-overlay" id="genericModal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 id="modalTitle">Info</h3>
+            <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <p id="modalBody" style="color:#64748b; font-size:14px; line-height: 1.5; margin-bottom: 20px;"></p>
+        <button class="submit-btn" onclick="closeModal()">Got it</button>
+    </div>
+</div>
+
+<!-- Form Modal -->
+<div class="modal-overlay" id="formModal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 id="formModalTitle">Form</h3>
+            <button class="close-btn" onclick="closeFormModal()">✕</button>
+        </div>
+        <input class="input-field" id="formInput1" placeholder="Title / Subject">
+        <textarea class="input-field" id="formInput2" rows="3" placeholder="Details..."></textarea>
+        <button class="submit-btn" onclick="handleFormSubmit()">Submit</button>
+    </div>
+</div>
+
+<script>
+function showModal(title, message) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalBody').innerText = message;
+    document.getElementById('genericModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('genericModal').style.display = 'none';
+}
+
+function openLostModal() {
+    document.getElementById('formModalTitle').innerText = 'Report Lost & Found';
+    document.getElementById('formInput1').placeholder = 'Item name (e.g. Blue Bottle)';
+    document.getElementById('formInput2').placeholder = 'Where was it lost/found?';
+    document.getElementById('formModal').style.display = 'flex';
+}
+
+function openComplaintModal() {
+    document.getElementById('formModalTitle').innerText = 'Digital Complaint / Request';
+    document.getElementById('formInput1').placeholder = 'Department (CSE Lab, Hostel, Library)';
+    document.getElementById('formInput2').placeholder = 'Describe your issue or query...';
+    document.getElementById('formModal').style.display = 'flex';
+}
+
+function openFeedback() {
+    document.getElementById('formModalTitle').innerText = 'Give Feedback';
+    document.getElementById('formInput1').placeholder = 'Subject / Faculty Name';
+    document.getElementById('formInput2').placeholder = 'Write your feedback here...';
+    document.getElementById('formModal').style.display = 'flex';
+}
+
+function closeFormModal() {
+    document.getElementById('formModal').style.display = 'none';
+    document.getElementById('formInput1').value = '';
+    document.getElementById('formInput2').value = '';
+}
+
+function handleFormSubmit() {
+    let f1 = document.getElementById('formInput1').value;
+    if (!f1.trim()) {
+        alert("Please fill in the details.");
+        return;
+    }
+    closeFormModal();
+    showModal("Success", "Your submission has been received. Ticket ID: #" + Math.floor(100000 + Math.random() * 900000));
+}
+
+function handleSearch(e) {
+    if (e.key === 'Enter') {
+        const query = document.getElementById('searchInput').value.trim();
+        if (query) {
+            showModal("Search Results", `Showing relevant campus modules for: "${query}"`);
+        }
+    }
+}
+
+function startVoice() {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert("Voice search is not supported in this browser.");
+        return;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-IN';
+    recognition.start();
+    
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('searchInput').value = transcript;
+        showModal("Voice Query", `Searching for: "${transcript}"`);
+    };
+}
+
+function triggerSOS() {
+    if (confirm("🚨 Are you sure you want to trigger Emergency SOS?\nCampus Security will be notified immediately.")) {
+        showModal("🚨 Emergency Alert Sent", "Campus security and first-aid response team have been dispatched to your current node.");
+    }
+}
+</script>
+
+</body>
+</html>

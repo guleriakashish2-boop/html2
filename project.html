@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduAI - Smart Question Generator & Practice Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printableArea, #printableArea * {
+        visibility: visible;
+      }
+      #printableArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
+      <div class="flex items-center space-x-2">
+        <div class="bg-indigo-600 text-white p-2 rounded-lg font-bold text-xl">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <span class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">EduAI PaperGen</span>
+      </div>
+      
+      <nav class="flex space-x-1 sm:space-x-4">
+        <button onclick="switchTab('generator')" id="tab-generator" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-indigo-600 bg-indigo-50 flex items-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> AI Generator
+        </button>
+        <button onclick="switchTab('practice')" id="tab-practice" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-laptop-code"></i> Practice Test
+        </button>
+        <button onclick="switchTab('bookmarks')" id="tab-bookmarks" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-bookmark"></i> Saved (<span id="bookmark-count">0</span>)
+        </button>
+        <button onclick="switchTab('admin')" id="tab-admin" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-chalkboard-user"></i> Admin Panel
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+    <section id="view-generator" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm no-print space-y-4">
+          <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-indigo-600"></i> Paper Settings
+          </h2>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Subject</label>
+            <select id="gen-subject" class="w-full border-slate-200 rounded-lg p-2.5 bg-slate-50 border focus:ring-2 focus:ring-indigo-500">
+              <option value="Physics">Physics</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Mathematics">Mathematics</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Unit / Topic</label>
+            <select id="gen-unit" class="w-full border-slate-200 rounded-lg p-2.5 bg-slate-50 border focus:ring-2 focus:ring-indigo-500">
+              <option value="All Units">All Units</option>
+              <option value="Unit 1">Unit 1: Fundamentals</option>
+              <option value="Unit 2">Unit 2: Advanced Topics</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Difficulty</label>
+            <select id="gen-difficulty" class="w-full border-slate-200 rounded-lg p-2.5 bg-slate-50 border focus:ring-2 focus:ring-indigo-500">
+              <option value="Mixed">Mixed (Balanced)</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Total Marks</label>
+            <input id="gen-marks" type="number" value="50" class="w-full border-slate-200 rounded-lg p-2.5 bg-slate-50 border focus:ring-2 focus:ring-indigo-500" />
+          </div>
+
+          <button onclick="generatePaper()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-md transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-bolt"></i> Generate Paper
+          </button>
+        </div>
+
+        <div class="md:col-span-2">
+          <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm" id="printableArea">
+            <div class="flex justify-between items-start border-b pb-4 mb-6">
+              <div>
+                <h1 class="text-2xl font-bold uppercase tracking-wider text-slate-800" id="paper-title">Term End Examination</h1>
+                <p class="text-sm text-slate-500" id="paper-subtitle">Subject: Computer Science | Time: 2 Hours</p>
+              </div>
+              <div class="text-right">
+                <span class="text-sm font-semibold text-slate-500">Max Marks:</span>
+                <span class="text-xl font-bold text-slate-800" id="paper-marks-display">50</span>
+              </div>
+            </div>
+
+            <div id="paper-questions" class="space-y-6">
+              <p class="text-slate-400 italic text-center py-10">Configure settings and click "Generate Paper" to preview questions here.</p>
+            </div>
+
+            <div class="mt-8 pt-4 border-t flex justify-end gap-3 no-print">
+              <button onclick="window.print()" class="px-4 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-2">
+                <i class="fa-solid fa-file-pdf text-red-500"></i> Download / Print PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-practice" class="hidden space-y-6 max-w-3xl mx-auto">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-center border-b pb-4 mb-4">
+          <h2 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-stopwatch text-indigo-600"></i> Practice Mode</h2>
+          <span id="quiz-score" class="text-sm font-semibold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full">Score: 0 / 0</span>
+        </div>
+        <div id="quiz-container" class="space-y-6">
+          </div>
+        <button onclick="submitQuiz()" class="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg shadow-md transition">
+          Submit Test & View Results
+        </button>
+      </div>
+    </section>
+
+    <section id="view-bookmarks" class="hidden space-y-4 max-w-4xl mx-auto">
+      <h2 class="text-xl font-bold text-slate-800 mb-2">Bookmarked Questions</h2>
+      <div id="bookmarks-container" class="space-y-4">
+        </div>
+    </section>
+
+    <section id="view-admin" class="hidden space-y-6">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-lg font-bold text-slate-800">Add Question to Bank</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input id="admin-subject" type="text" placeholder="Subject (e.g. Physics)" class="border p-2 rounded-lg" />
+          <input id="admin-unit" type="text" placeholder="Unit (e.g. Unit 1)" class="border p-2 rounded-lg" />
+          <select id="admin-diff" class="border p-2 rounded-lg bg-white">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+        <textarea id="admin-question" rows="2" placeholder="Enter Question Prompt" class="w-full border p-2 rounded-lg"></textarea>
+        <button onclick="addQuestion()" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700">
+          Save Question
+        </button>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b font-bold text-slate-800">Existing Question Database</div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-600">
+            <thead class="bg-slate-50 border-b">
+              <tr>
+                <th class="p-3">Subject</th>
+                <th class="p-3">Unit</th>
+                <th class="p-3">Difficulty</th>
+                <th class="p-3">Question</th>
+                <th class="p-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // --- Initial Mock Data Bank ---
+    let questionBank = [
+      { id: 1, subject: 'Computer Science', unit: 'Unit 1', diff: 'Easy', text: 'Explain the difference between Compiler and Interpreter.', marks: 5 },
+      { id: 2, subject: 'Computer Science', unit: 'Unit 1', diff: 'Medium', text: 'What is Time Complexity? Calculate the Big-O for Binary Search.', marks: 10 },
+      { id: 3, subject: 'Computer Science', unit: 'Unit 2', diff: 'Hard', text: 'Implement Dijkstra\'s shortest path algorithm using a Min-Heap.', marks: 15 },
+      { id: 4, subject: 'Physics', unit: 'Unit 1', diff: 'Easy', text: 'State Newton\'s Second Law of Motion and derive F = ma.', marks: 5 },
+      { id: 5, subject: 'Physics', unit: 'Unit 2', diff: 'Medium', text: 'Explain the photoelectric effect with Einstein\'s equation.', marks: 10 },
+      { id: 6, subject: 'Mathematics', unit: 'Unit 1', diff: 'Medium', text: 'Evaluate the integral of sec^3(x) dx.', marks: 10 }
+    ];
+
+    const practiceMCQs = [
+      {
+        id: 101,
+        question: "Which data structure operates on a Last In First Out (LIFO) basis?",
+        options: ["Queue", "Stack", "Array", "Linked List"],
+        answer: 1
+      },
+      {
+        id: 102,
+        question: "What is the speed of light in a vacuum?",
+        options: ["3 x 10^8 m/s", "3 x 10^6 m/s", "1.5 x 10^8 m/s", "3 x 10^10 m/s"],
+        answer: 0
+      }
+    ];
+
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+
+    // --- Tab Switching Logic ---
+    function switchTab(tab) {
+      ['generator', 'practice', 'bookmarks', 'admin'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`tab-${t}`).className = 'nav-btn px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-indigo-600 flex items-center gap-1.5';
+      });
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-${tab}`).className = 'nav-btn px-3 py-2 rounded-md text-sm font-medium text-indigo-600 bg-indigo-50 flex items-center gap-1.5';
+      
+      if (tab === 'bookmarks') renderBookmarks();
+      if (tab === 'admin') renderAdminTable();
+      if (tab === 'practice') renderPracticeTest();
+    }
+
+    // --- AI Paper Generation Logic ---
+    function generatePaper() {
+      const subject = document.getElementById('gen-subject').value;
+      const diff = document.getElementById('gen-difficulty').value;
+      const marks = document.getElementById('gen-marks').value;
+
+      document.getElementById('paper-title').innerText = `${subject} Examination`;
+      document.getElementById('paper-subtitle').innerText = `Difficulty: ${diff} | Target Marks: ${marks}`;
+      document.getElementById('paper-marks-display').innerText = marks;
+
+      // Filter questions
+      let filtered = questionBank.filter(q => q.subject === subject);
+      if (diff !== 'Mixed') {
+        filtered = filtered.filter(q => q.diff === diff);
+      }
+
+      const container = document.getElementById('paper-questions');
+      if (filtered.length === 0) {
+        container.innerHTML = `<p class="text-amber-600 py-4">No questions found matching criteria. Add some in the Admin Panel.</p>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map((q, idx) => `
+        <div class="flex justify-between items-start border-b border-slate-100 pb-3">
+          <div>
+            <span class="font-bold text-slate-700">Q${idx + 1}.</span> 
+            <span class="text-slate-800 ml-1">${q.text}</span>
+            <div class="text-xs text-slate-400 mt-1">Difficulty: ${q.diff} | Unit: ${q.unit}</div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-semibold text-slate-500">[${q.marks} Marks]</span>
+            <button onclick="toggleBookmark(${q.id})" class="text-slate-400 hover:text-amber-500 no-print">
+              <i class="${bookmarks.includes(q.id) ? 'fa-solid text-amber-500' : 'fa-regular'} fa-bookmark"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- Bookmarks Logic ---
+    function toggleBookmark(id) {
+      if (bookmarks.includes(id)) {
+        bookmarks = bookmarks.filter(bId => bId !== id);
+      } else {
+        bookmarks.push(id);
+      }
+      localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+      updateBookmarkCount();
+      generatePaper(); // Re-render current view icon states
+    }
+
+    function updateBookmarkCount() {
+      document.getElementById('bookmark-count').innerText = bookmarks.length;
+    }
+
+    function renderBookmarks() {
+      const container = document.getElementById('bookmarks-container');
+      const savedItems = questionBank.filter(q => bookmarks.includes(q.id));
+
+      if (savedItems.length === 0) {
+        container.innerHTML = `<p class="text-slate-400">No bookmarked questions yet.</p>`;
+        return;
+      }
+
+      container.innerHTML = savedItems.map(q => `
+        <div class="p-4 bg-white rounded-lg border border-slate-200 flex justify-between items-center">
+          <div>
+            <p class="font-medium text-slate-800">${q.text}</p>
+            <span class="text-xs bg-slate-100 px-2 py-0.5 rounded text-slate-600">${q.subject}</span>
+          </div>
+          <button onclick="toggleBookmark(${q.id}); renderBookmarks();" class="text-red-500 hover:text-red-700 text-sm">
+            <i class="fa-solid fa-trash"></i> Remove
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // --- Practice Test Logic ---
+    function renderPracticeTest() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = practiceMCQs.map((q, idx) => `
+        <div class="border-b pb-4">
+          <p class="font-medium text-slate-800 mb-2">${idx + 1}. ${q.question}</p>
+          <div class="space-y-2">
+            ${q.options.map((opt, oIdx) => `
+              <label class="flex items-center gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer text-sm">
+                <input type="radio" name="mcq-${q.id}" value="${oIdx}" class="text-indigo-600" />
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      practiceMCQs.forEach(q => {
+        const selected = document.querySelector(`input[name="mcq-${q.id}"]:checked`);
+        if (selected && parseInt(selected.value) === q.answer) {
+          score++;
+        }
+      });
+      document.getElementById('quiz-score').innerText = `Score: ${score} / ${practiceMCQs.length}`;
+      alert(`Test Submitted! Your Score: ${score}/${practiceMCQs.length}`);
+    }
+
+    // --- Admin Functions ---
+    function renderAdminTable() {
+      const tbody = document.getElementById('admin-table-body');
+      tbody.innerHTML = questionBank.map(q => `
+        <tr class="border-b hover:bg-slate-50">
+          <td class="p-3">${q.subject}</td>
+          <td class="p-3">${q.unit}</td>
+          <td class="p-3"><span class="text-xs px-2 py-1 rounded bg-slate-100">${q.diff}</span></td>
+          <td class="p-3 font-medium text-slate-800">${q.text}</td>
+          <td class="p-3 text-right">
+            <button onclick="deleteQuestion(${q.id})" class="text-red-500 hover:text-red-700">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function addQuestion() {
+      const subject = document.getElementById('admin-subject').value;
+      const unit = document.getElementById('admin-unit').value;
+      const diff = document.getElementById('admin-diff').value;
+      const text = document.getElementById('admin-question').value;
+
+      if (!subject || !unit || !text) {
+        alert('Please fill all fields');
+        return;
+      }
+
+      questionBank.push({
+        id: Date.now(),
+        subject,
+        unit,
+        diff,
+        text,
+        marks: 5
+      });
+
+      document.getElementById('admin-question').value = '';
+      renderAdminTable();
+    }
+
+    function deleteQuestion(id) {
+      questionBank = questionBank.filter(q => q.id !== id);
+      renderAdminTable();
+    }
+
+    // Init
+    updateBookmarkCount();
+    generatePaper();
+  </script>
+</body>
+</html>

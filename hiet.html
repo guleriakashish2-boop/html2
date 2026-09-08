@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centralized College Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🏫 Centralized College Portal</h1>
+    <p>All College Information in One Place</p>
+</header>
+
+<nav>
+    <button onclick="showHome()">Home</button>
+    <button onclick="showCategory('B.Tech')">B.Tech</button>
+    <button onclick="showCategory('Law')">Law</button>
+    <button onclick="showCategory('Other Programs')">Other Programs</button>
+    <button onclick="showCategory('Polytechnic')">Polytechnic</button>
+</nav>
+
+<main>
+
+    <section id="home">
+        <h2>Welcome 👋</h2>
+        <p>Select a program to explore its departments.</p>
+
+        <div class="category-container">
+
+            <div class="category-card" onclick="showCategory('B.Tech')">
+                <h2>🎓 B.Tech</h2>
+                <p>5 Branches</p>
+            </div>
+
+            <div class="category-card" onclick="showCategory('Law')">
+                <h2>⚖️ Law</h2>
+                <p>BALLB</p>
+            </div>
+
+            <div class="category-card" onclick="showCategory('Other Programs')">
+                <h2>🎓 Other Programs</h2>
+                <p>BCA & BBA</p>
+            </div>
+
+            <div class="category-card" onclick="showCategory('Polytechnic')">
+                <h2>🔧 Polytechnic</h2>
+                <p>4 Branches</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="programSection" class="hidden">
+
+        <button class="back-btn" onclick="showHome()">⬅ Back</button>
+
+        <h2 id="categoryTitle"></h2>
+
+        <div id="departmentContainer"></div>
+
+    </section>
+
+
+    <!-- AI ASSISTANT -->
+
+    <section class="ai-section">
+
+        <h2>🤖 AI College Assistant</h2>
+
+        <p>Ask me about any department or program.</p>
+
+        <div id="chatBox">
+            <p><b>AI:</b> Hello! 👋 Ask me about CSE, EEE, Civil, AI/ML, Mechanical, BALLB, BCA or BBA.</p>
+        </div>
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                id="userQuestion"
+                placeholder="Ask your question..."
+                onkeydown="if(event.key === 'Enter') askAI()"
+            >
+
+            <button onclick="askAI()">Ask</button>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 Centralized College Portal</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

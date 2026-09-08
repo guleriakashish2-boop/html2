@@ -1,0 +1,320 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8ff;
+    color: #17233c;
+}
+
+header {
+    background: #ffffff;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px #d8dce5;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: #1756a9;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #17233c;
+    font-weight: bold;
+}
+
+nav button {
+    background: #1756a9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hero {
+    min-height: 570px;
+    padding: 80px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(120deg, #e9f3ff, #ffffff);
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.hero-text h1 {
+    font-size: 55px;
+    color: #124c91;
+    margin-bottom: 15px;
+}
+
+.hero-text h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.main-btn {
+    padding: 15px 28px;
+    background: #1756a9;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hero-card {
+    background: white;
+    width: 300px;
+    height: 300px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px #cbd4e2;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.circle {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.hero-card h3 {
+    font-size: 25px;
+    color: #1756a9;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 35px;
+    margin: 70px 0 40px;
+}
+
+.services {
+    padding: 0 7% 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px #dce2ec;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card span {
+    font-size: 45px;
+}
+
+.card h3 {
+    margin: 15px 0 10px;
+    color: #1756a9;
+}
+
+.card p {
+    color: #64748b;
+}
+
+.emergency {
+    border: 2px solid #ef4444;
+}
+
+.about {
+    padding: 80px 12%;
+    text-align: center;
+    background: #ffffff;
+}
+
+.about h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #1756a9;
+}
+
+.about p {
+    max-width: 850px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.features {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.features div {
+    padding: 20px;
+    background: #eef5ff;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    background: #102a4c;
+    color: white;
+}
+
+footer p {
+    margin-top: 10px;
+}
+
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: white;
+    width: 90%;
+    max-width: 550px;
+    padding: 35px;
+    border-radius: 20px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.modal-box h2 {
+    color: #1756a9;
+    margin-bottom: 25px;
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 15px;
+    border: 1px solid #ccd4df;
+    border-radius: 8px;
+}
+
+.modal-box button {
+    padding: 12px 20px;
+    background: #1756a9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.info {
+    background: #eef5ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.chat {
+    height: 250px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.user-msg {
+    text-align: right;
+    margin: 10px;
+}
+
+.bot-msg {
+    text-align: left;
+    margin: 10px;
+    color: #1756a9;
+}
+
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+
+    nav a {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+        width: 250px;
+    }
+}

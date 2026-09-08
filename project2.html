@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centralized College Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">🎓 College Portal</div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#departments">Departments</a>
+            <a href="#notices">Notices</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our College</h1>
+
+            <p>
+                One centralized platform for students, faculty and college information.
+            </p>
+
+            <button onclick="showMessage()">
+                Explore College
+            </button>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about" class="section">
+
+        <h2>About Our College</h2>
+
+        <p>
+            Our college provides quality education, modern facilities,
+            experienced faculty and opportunities for students to develop
+            technical and professional skills.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🏫 Campus</h3>
+                <p>Modern campus with student-friendly facilities.</p>
+            </div>
+
+            <div class="card">
+                <h3>👨‍🏫 Faculty</h3>
+                <p>Experienced and supportive teaching staff.</p>
+            </div>
+
+            <div class="card">
+                <h3>💻 Technology</h3>
+                <p>Computer labs and modern learning resources.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Departments -->
+    <section id="departments" class="section">
+
+        <h2>Departments</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>💻 CSE</h3>
+                <p>Computer Science and Engineering</p>
+            </div>
+
+            <div class="card">
+                <h3>⚡ ECE</h3>
+                <p>Electronics and Communication Engineering</p>
+            </div>
+
+            <div class="card">
+                <h3>⚙️ ME</h3>
+                <p>Mechanical Engineering</p>
+            </div>
+
+            <div class="card">
+                <h3>🏗️ CE</h3>
+                <p>Civil Engineering</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Notices -->
+    <section id="notices" class="section">
+
+        <h2>📢 Latest Notices</h2>
+
+        <div class="notice">
+            <strong>Notice 1:</strong>
+            Engineering Day project presentations will be held soon.
+        </div>
+
+        <div class="notice">
+            <strong>Notice 2:</strong>
+            Students are requested to check their examination schedule.
+        </div>
+
+        <div class="notice">
+            <strong>Notice 3:</strong>
+            New academic notifications have been uploaded.
+        </div>
+
+    </section>
+
+
+    <!-- Events -->
+    <section id="events" class="section">
+
+        <h2>📅 College Events</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Engineering Day</h3>
+                <p>Technical projects and exhibitions.</p>
+            </div>
+
+            <div class="card">
+                <h3>Annual Function</h3>
+                <p>Cultural activities and student performances.</p>
+            </div>
+
+            <div class="card">
+                <h3>Sports Day</h3>
+                <p>Various sports and recreational activities.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+
+        <h2>📞 Contact Us</h2>
+
+        <p><strong>College:</strong> Your College Name</p>
+        <p><strong>Address:</strong> Your College Address</p>
+        <p><strong>Email:</strong> college@example.com</p>
+        <p><strong>Phone:</strong> +91 XXXXX XXXXX</p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Centralized College Portal</p>
+        <p>Designed for College Project</p>
+    </footer>
+    </body>
+</html></body>
+
+
+
+    src="script.js"></script>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    backgroun <scriptd: #f4f6f9;
+    color: #222;
+}
+
+
+/* Navigation */
+
+header {
+    background: #172554;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* Hero */
+
+.hero {
+    min-height: 500px;
+
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url("college.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 700px;
+    padding: 30px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 13px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+
+/* Sections */
+
+.section {
+    padding: 70px 8%;
+    text-align: center;
+}
+
+.section h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #172554;
+}
+
+.section > p {
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.7;
+}
+
+
+/* Cards */
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.card {
+    background: white;
+    width: 240px;
+    padding: 25px;
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+}
+
+.card h3 {
+    color: #2563eb;
+    margin-bottom: 12px;
+}
+
+.card p {
+    line-height: 1.5;
+}
+
+
+/* Notices */
+
+.notice {
+    background: white;
+    padding: 18px;
+    margin: 15px auto;
+    max-width: 800px;
+
+    border-left: 5px solid #2563eb;
+
+    text-align: left;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+
+/* Contact */
+
+.contact {
+    background: #e8eefc;
+}
+
+.contact p {
+    margin: 10px;
+}
+
+
+/* Footer */
+
+footer {
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+footer p {
+    margin: 5px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 5px;
+        display: inline-block;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
