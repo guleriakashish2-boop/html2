@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Campus Portal</title>
+    <title>hietfindit - Smart Campus Portal</title>
     <style>
         /* =========================================
-           Aapki Style2.css Yahan Hai
+           CSS STYLES
         ========================================= */
         * {
             margin: 0;
@@ -33,9 +33,14 @@
         }
 
         .logo {
-            font-size: 23px;
+            font-size: 24px;
             font-weight: bold;
             color: #1756a9;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: #ef4444;
         }
 
         nav {
@@ -57,6 +62,7 @@
             padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .hero {
@@ -97,16 +103,17 @@
             border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .hero-card {
             background: white;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
             border-radius: 30px;
             box-shadow: 0 10px 30px #cbd4e2;
             text-align: center;
-            padding: 40px 20px;
+            padding: 45px 20px;
         }
 
         .circle {
@@ -148,63 +155,23 @@
 
         .card span {
             font-size: 45px;
+            display: block;
+            margin-bottom: 10px;
         }
 
         .card h3 {
-            margin: 15px 0 10px;
+            margin: 10px 0;
             color: #1756a9;
+            font-size: 18px;
         }
 
         .card p {
             color: #64748b;
+            font-size: 14px;
         }
 
         .emergency {
             border: 2px solid #ef4444;
-        }
-
-        .about {
-            padding: 80px 12%;
-            text-align: center;
-            background: #ffffff;
-        }
-
-        .about h2 {
-            font-size: 35px;
-            margin-bottom: 20px;
-            color: #1756a9;
-        }
-
-        .about p {
-            max-width: 850px;
-            margin: auto;
-            line-height: 1.8;
-            font-size: 17px;
-        }
-
-        .features {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .features div {
-            padding: 20px;
-            background: #eef5ff;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: #102a4c;
-            color: white;
-        }
-
-        footer p {
-            margin-top: 10px;
         }
 
         /* MODAL STYLES */
@@ -259,6 +226,7 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .info {
@@ -266,40 +234,58 @@
             padding: 15px;
             border-radius: 10px;
             margin: 10px 0;
+            line-height: 1.5;
         }
-
-        .chat {
-            height: 250px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
+        
+        /* New Styles for Faculty and Images */
+        .faculty-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #eef5ff;
             padding: 15px;
-            margin-bottom: 15px;
             border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .faculty-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1756a9;
         }
 
-        .user-msg {
-            text-align: right;
-            margin: 10px;
+        .modal-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
 
-        .bot-msg {
-            text-align: left;
-            margin: 10px;
-            color: #1756a9;
+        .flex-row {
+            display: flex;
+            gap: 10px;
         }
 
-        /* MOBILE RESPONSIVE */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #102a4c;
+            color: white;
+        }
+
         @media(max-width: 900px) {
             nav a { display: none; }
             .hero { flex-direction: column; text-align: center; gap: 50px; }
             .hero-text h1 { font-size: 40px; }
             .services { grid-template-columns: repeat(2, 1fr); }
-            .features { grid-template-columns: 1fr; }
         }
 
         @media(max-width: 550px) {
             .services { grid-template-columns: 1fr; }
-            .hero-card { width: 250px; }
+            .flex-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -307,82 +293,61 @@
 
     <!-- NAVBAR -->
     <header>
-        <div class="logo">🏫 Smart Campus</div>
+        <div class="logo">🏫 hiet<span>findit</span></div>
         <nav>
             <a href="#">Home</a>
             <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <button onclick="openLogin()">🔐 Login</button>
+            <button onclick="openLogin()">🔐 Student Login</button>
         </nav>
     </header>
 
     <!-- HERO SECTION -->
     <div class="hero">
         <div class="hero-text">
-            <h1>Welcome to Smart Campus</h1>
-            <h2>Your Digital College Assistant</h2>
-            <p>Access timetable, library, canteen, navigation, and campus services all in one place effortlessly.</p>
-            <button class="main-btn" onclick="openChat()">Ask CampusAI 🤖</button>
+            <h1>Welcome to hietfindit</h1>
+            <h2>Explore Your College, Instantly.</h2>
+            <p>From finding lost items to tracking buses, navigating the campus, and contacting faculty. Your complete college assistant is here.</p>
+            <button class="main-btn" onclick="showNavigation()">Explore Campus Map 🗺️</button>
         </div>
         <div class="hero-card">
-            <div class="circle">👨‍🎓</div>
-            <h3>Student Portal</h3>
-            <p style="margin-top:10px; color:#64748b;">Quick access to all your college needs instantly.</p>
+            <div class="circle">🎓</div>
+            <h3>Smart Access</h3>
+            <p style="margin-top:10px; color:#64748b;">Connect with HIET facilities digitally, anytime, anywhere.</p>
         </div>
     </div>
 
     <!-- SERVICES (Grid) -->
-    <h2 class="section-title" id="services">🚀 Our Smart Services</h2>
+    <h2 class="section-title" id="services">🚀 Campus Features</h2>
     <div class="services">
+        <div class="card" onclick="showLostFound()">
+            <span>🔎</span><h3>Lost & Found</h3><p>Report or find lost items</p>
+        </div>
+        <div class="card" onclick="showComplaint()">
+            <span>🛠️</span><h3>Complaint Box</h3><p>Register issues securely</p>
+        </div>
+        <div class="card" onclick="showFaculty()">
+            <span>👨‍🏫</span><h3>Faculty Info</h3><p>Teacher cabins & details</p>
+        </div>
+        <div class="card" onclick="showBus()">
+            <span>🚌</span><h3>Transport</h3><p>Bus routes & stops map</p>
+        </div>
+        <div class="card" onclick="showCanteen()">
+            <span>🍔</span><h3>Canteen</h3><p>Food menu & timings</p>
+        </div>
+        <div class="card" onclick="showNavigation()">
+            <span>🗺️</span><h3>Navigation</h3><p>Campus building map</p>
+        </div>
         <div class="card" onclick="showTimetable()">
             <span>📅</span><h3>Timetable</h3><p>Check daily schedule</p>
         </div>
-        <div class="card" onclick="showNavigation()">
-            <span>🗺️</span><h3>Navigation</h3><p>Find your way</p>
-        </div>
-        <div class="card" onclick="showQR()">
-            <span>📱</span><h3>QR Scan</h3><p>Scan for entry</p>
-        </div>
-        <div class="card" onclick="startVoice()">
-            <span>🎤</span><h3>Voice Assistant</h3><p>Talk to CampusAI</p>
-        </div>
         <div class="card" onclick="showLibrary()">
-            <span>📚</span><h3>Library</h3><p>Search books</p>
-        </div>
-        <div class="card" onclick="showComplaint()">
-            <span>🛠️</span><h3>Complaints</h3><p>Register an issue</p>
-        </div>
-        <div class="card" onclick="showBus()">
-            <span>🚌</span><h3>Transport</h3><p>Bus routes & timing</p>
-        </div>
-        <div class="card" onclick="showCanteen()">
-            <span>🍔</span><h3>Canteen</h3><p>Food menu & prices</p>
-        </div>
-        <div class="card" onclick="showFaculty()">
-            <span>👨‍🏫</span><h3>Faculty</h3><p>Staff details</p>
-        </div>
-        <div class="card" onclick="showNotices()">
-            <span>📢</span><h3>Notices</h3><p>Latest campus updates</p>
-        </div>
-        <div class="card emergency" onclick="emergency()">
-            <span>🚨</span><h3 style="color:#ef4444;">SOS Alert</h3><p>Emergency help</p>
-        </div>
-    </div>
-
-    <!-- ABOUT SECTION -->
-    <div class="about" id="about">
-        <h2>About Smart Campus</h2>
-        <p>Smart Campus is an integrated digital platform designed to make college life easier and more connected. Find everything you need right at your fingertips.</p>
-        <div class="features">
-            <div>⚡ Fast Access</div>
-            <div>🤖 AI Powered</div>
-            <div>🔒 Highly Secure</div>
+            <span>📚</span><h3>Library</h3><p>Search available books</p>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2026 Smart Campus Integrated Digital System. All rights reserved.</p>
+        <p>© 2026 hietfindit Platform. All rights reserved.</p>
     </footer>
 
     <!-- MAIN MODAL POPUP -->
@@ -396,9 +361,6 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        /* =========================================
-           Aapki Script2.js Yahan Hai
-        ========================================= */
         const modal = document.getElementById("modal");
         const title = document.getElementById("modalTitle");
         const content = document.getElementById("modalContent");
@@ -413,216 +375,194 @@
             modal.style.display = "none";
         }
 
-        /* LOGIN */
+        /* 1. LOGIN */
         function openLogin() {
             openModal("🔐 Student Login", `
-                <input type="text" id="username" placeholder="Student ID">
+                <input type="text" id="username" placeholder="Student ID / Roll No">
                 <input type="password" placeholder="Password">
-                <button onclick="login()">Login</button>
+                <button onclick="login()">Login Securely</button>
                 <p id="loginResult" style="margin-top:10px; font-weight:bold; color:green;"></p>
             `);
         }
-
         function login() {
-            document.getElementById("loginResult").innerHTML = "✅ Login successful! Welcome to Smart Campus.";
+            document.getElementById("loginResult").innerHTML = "✅ Login successful! Welcome to hietfindit.";
         }
 
-        /* AI CHATBOT */
-        function openChat() {
-            openModal("🤖 CampusAI Assistant", `
-                <div class="chat" id="chatBox">
-                    <div class="bot-msg">
-                        🤖 Hello! I am CampusAI.<br>
-                        Ask me about timetable, labs, library, faculty or campus.
+        /* 2. LOST & FOUND (NEW) */
+        function showLostFound() {
+            openModal("🔎 Lost & Found Desk", `
+                <div class="flex-row">
+                    <input id="lfItem" placeholder="What did you lose/find? (e.g., Black Wallet)" style="flex:2;">
+                    <select id="lfType" style="flex:1;">
+                        <option>I Lost this</option>
+                        <option>I Found this</option>
+                    </select>
+                </div>
+                <input id="lfLocation" placeholder="Location (e.g., Near Canteen)">
+                <button onclick="submitLF()" style="width:100%;">Submit Report</button>
+                <p id="lfResult" style="color:green; font-weight:bold; margin-top:10px;"></p>
+                
+                <h3 style="margin-top:25px; color:#1756a9; font-size: 18px;">Recent Campus Logs:</h3>
+                <div class="info" style="border-left: 4px solid red;">🔴 <b>Lost:</b> Titan Watch<br><small>Location: Block A Washroom | Date: Today</small></div>
+                <div class="info" style="border-left: 4px solid green;">🟢 <b>Found:</b> ID Card (Rohit, CSE)<br><small>Location: Library Desk | Date: Yesterday</small></div>
+            `);
+        }
+        function submitLF() {
+            document.getElementById("lfResult").innerHTML = "✅ Item logged successfully! Security has been notified.";
+        }
+
+        /* 3. COMPLAINT BOX */
+        function showComplaint() {
+            openModal("🛠️ Digital Complaint Box", `
+                <p style="margin-bottom:15px; color:#64748b;">File complaints regarding maintenance, infrastructure, or discipline directly to the admin.</p>
+                <select id="compCategory">
+                    <option>Classroom/Lab Maintenance (AC/Fan/PC)</option>
+                    <option>Cleanliness/Hygiene</option>
+                    <option>Hostel/Mess Issue</option>
+                    <option>Disciplinary/Other</option>
+                </select>
+                <input id="compLocation" placeholder="Specific Location (e.g., CSE Lab 2)">
+                <textarea id="compText" placeholder="Describe the issue in detail..." rows="4"></textarea>
+                <button onclick="submitComplaint()" style="width:100%;">Lodge Complaint</button>
+                <p id="compResult" style="color:green; font-weight:bold; margin-top:10px;"></p>
+            `);
+        }
+        function submitComplaint() {
+            let id = "TKT-" + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("compResult").innerHTML = `✅ Ticket Raised! Your tracking ID is <b>${id}</b>.`;
+        }
+
+        /* 4. FACULTY INFO (WITH IMAGES) */
+        function showFaculty() {
+            openModal("👨‍🏫 Faculty Directory", `
+                <div class="faculty-card">
+                    <!-- Generic placeholder image for male professor -->
+                    <img src="https://ui-avatars.com/api/?name=Dr+R+K+Sharma&background=1756a9&color=fff&size=100" alt="Prof Image">
+                    <div>
+                        <h3 style="margin:0; color:#124c91;">Dr. R. K. Sharma</h3>
+                        <p style="color:#64748b; font-weight:bold; font-size:14px;">HOD - Computer Science</p>
+                        <p style="font-size:14px; margin-top:5px;">📍 Cabin: Block A, Room 301</p>
                     </div>
                 </div>
-                <input type="text" id="question" placeholder="Ask your question...">
-                <button onclick="askAI()">Ask</button>
+
+                <div class="faculty-card">
+                    <!-- Generic placeholder image for female professor -->
+                    <img src="https://ui-avatars.com/api/?name=Prof+Anita+Verma&background=ef4444&color=fff&size=100" alt="Prof Image">
+                    <div>
+                        <h3 style="margin:0; color:#124c91;">Prof. Anita Verma</h3>
+                        <p style="color:#64748b; font-weight:bold; font-size:14px;">Associate Professor (Python & ML)</p>
+                        <p style="font-size:14px; margin-top:5px;">📍 Cabin: Block A, Room 204</p>
+                    </div>
+                </div>
+
+                <div class="faculty-card">
+                    <img src="https://ui-avatars.com/api/?name=Mr+Amit+Singh&background=10b981&color=fff&size=100" alt="Prof Image">
+                    <div>
+                        <h3 style="margin:0; color:#124c91;">Mr. Amit Singh</h3>
+                        <p style="color:#64748b; font-weight:bold; font-size:14px;">Lab Instructor</p>
+                        <p style="font-size:14px; margin-top:5px;">📍 Cabin: Ground Floor, Server Room</p>
+                    </div>
+                </div>
             `);
         }
 
-        function askAI() {
-            let question = document.getElementById("question").value.toLowerCase();
-            let answer = "";
+        /* 5. TRANSPORT & BUS ROUTES (WITH IMAGE) */
+        function showBus() {
+            openModal("🚌 Transport & Routes", `
+                <!-- Generic map placeholder image -->
+                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=200&fit=crop" class="modal-img" alt="Bus Route Map">
+                
+                <h3 style="margin-bottom:10px; font-size:18px;">Active Routes:</h3>
+                
+                <div class="info">
+                    <b>🚌 Route 01: City Centre Route</b><br>
+                    <small><b>Stops:</b> Main Bus Stand ➔ Civil Hospital ➔ Subhash Chowk ➔ College</small><br>
+                    <span style="color:green; font-weight:bold; font-size:13px;">🟢 Departs: 7:30 AM | Status: On Route</span>
+                </div>
 
-            if (question.includes("lab")) {
-                answer = "📍 CSE Lab is in Block A, 2nd Floor, Room 204.";
-            } else if (question.includes("next class")) {
-                answer = "📅 Your next class is Data Structures at 10:00 AM.";
-            } else if (question.includes("python") || question.includes("teacher")) {
-                answer = "👨‍🏫 Python is handled by the CSE department faculty.";
-            } else if (question.includes("library")) {
-                answer = "📚 Library is located near the Main Academic Block.";
-            } else if (question.includes("canteen")) {
-                answer = "🍔 Canteen is open from 9:00 AM to 5:00 PM.";
-            } else {
-                answer = "🤖 I am still learning. Please try asking about lab, timetable, library or canteen.";
-            }
-
-            document.getElementById("chatBox").innerHTML += `<div class="user-msg">👤 ${question}</div>`;
-            document.getElementById("chatBox").innerHTML += `<div class="bot-msg">🤖 ${answer}</div>`;
-            document.getElementById("question").value = "";
-        }
-
-        /* TIMETABLE */
-        function showTimetable() {
-            openModal("📅 Smart Timetable", `
-                <div class="info"><b>09:00 AM</b><br>Mathematics</div>
-                <div class="info"><b>10:00 AM</b><br>Data Structures</div>
-                <div class="info"><b>11:00 AM</b><br>Programming Lab</div>
-                <div class="info"><b>01:30 PM</b><br>Communication Skills</div>
+                <div class="info">
+                    <b>🚌 Route 02: Station Route</b><br>
+                    <small><b>Stops:</b> Railway Station ➔ Gandhi Market ➔ College</small><br>
+                    <span style="color:#d97706; font-weight:bold; font-size:13px;">🟡 Departs: 8:00 AM | Status: 5 Min Delay</span>
+                </div>
             `);
         }
 
-        /* NAVIGATION */
+        /* 6. CAMPUS NAVIGATION */
         function showNavigation() {
-            openModal("🗺️ Smart Campus Navigation", `
+            openModal("🗺️ Campus Navigation Map", `
+                <!-- Generic campus map placeholder image -->
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=600&h=200&fit=crop" class="modal-img" alt="Campus Map">
+                
                 <select id="destination">
-                    <option>CSE Lab</option>
+                    <option>Select Destination...</option>
+                    <option>CSE Lab (Block A)</option>
                     <option>HOD Office</option>
-                    <option>Library</option>
-                    <option>Canteen</option>
-                    <option>Main Gate</option>
+                    <option>Central Library</option>
+                    <option>Main Canteen</option>
                 </select>
-                <button onclick="findRoute()">Take Me There 🚶</button>
+                <button onclick="findRoute()" style="width:100%;">Show Directions 🚶</button>
                 <div id="route" style="margin-top:15px;"></div>
             `);
         }
-
         function findRoute() {
             let place = document.getElementById("destination").value;
+            if(place === "Select Destination...") return;
             document.getElementById("route").innerHTML = `
-                <div class="info">
-                    📍 Route to <b>${place}</b><br><br>
-                    Main Gate → Central Corridor → Block A → ${place}
-                    <br><br>🚶 Estimated walking time: 3 minutes
+                <div class="info" style="border-left: 4px solid #1756a9;">
+                    📍 <b>Path to ${place}:</b><br><br>
+                    Enter from Main Gate ➔ Walk straight down Central Corridor ➔ Look for signboards ➔ Arrive at ${place}.
+                    <br><br>🚶 Estimated walking time: 3-5 minutes
                 </div>
             `;
         }
 
-        /* QR */
-        function showQR() {
-            openModal("📱 QR / Barcode Smart Scan", `
-                <p>Enter Campus ID:</p>
-                <input id="qrText" value="CSE-LAB-204">
-                <button onclick="generateQR()">Generate QR</button>
-                <div id="qrResult" style="margin-top:20px;text-align:center;"></div>
+        /* 7. CANTEEN */
+        function showCanteen() {
+            openModal("🍔 Smart Canteen Menu", `
+                <!-- Generic food placeholder image -->
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=200&fit=crop" class="modal-img" alt="Canteen Food">
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div class="info" style="margin:0;">🍛 <b>Rajma Rice</b><br>₹60</div>
+                    <div class="info" style="margin:0;">🥪 <b>Veg Sandwich</b><br>₹40</div>
+                    <div class="info" style="margin:0;">🍜 <b>Hakka Noodles</b><br>₹50</div>
+                    <div class="info" style="margin:0;">☕ <b>Tea / Coffee</b><br>₹15</div>
+                </div>
+                <p style="margin-top:15px; text-align:center; color:#64748b;"><b>⏰ Open Timing:</b> 9:00 AM – 5:00 PM</p>
             `);
         }
 
-        function generateQR() {
-            let value = document.getElementById("qrText").value;
-            document.getElementById("qrResult").innerHTML = `
-                <div class="info">📱 QR Code Generated<br><br><b>${value}</b></div>
-            `;
+        /* 8. TIMETABLE */
+        function showTimetable() {
+            openModal("📅 Smart Timetable", `
+                <h3 style="margin-bottom:10px;">Today's Classes (CSE)</h3>
+                <div class="info"><b>09:00 AM - 10:00 AM</b><br>Applied Mathematics (Block B)</div>
+                <div class="info"><b>10:00 AM - 11:30 AM</b><br>Data Structures Lab (CSE Lab 2)</div>
+                <div class="info"><b>12:00 PM - 01:00 PM</b><br>Software Engineering</div>
+            `);
         }
 
-        /* VOICE */
-        function startVoice() {
-            if (!("webkitSpeechRecognition" in window)) {
-                alert("Voice recognition is not supported in this browser. Use Chrome.");
-                return;
-            }
-            let recognition = new webkitSpeechRecognition();
-            recognition.lang = "en-IN";
-            recognition.start();
-
-            recognition.onresult = function(event) {
-                let text = event.results[0][0].transcript;
-                openModal("🎤 Voice Assistant", `
-                    <div class="info">You said:<br><br><b>${text}</b></div>
-                    <p>CampusAI is processing your question...</p>
-                `);
-            };
-        }
-
-        /* LIBRARY */
+        /* 9. LIBRARY */
         function showLibrary() {
             openModal("📚 Smart Library", `
-                <input placeholder="Search book..." id="bookSearch">
-                <button onclick="searchBook()">Search</button>
+                <div class="flex-row">
+                    <input placeholder="Search book name or author..." id="bookSearch" style="flex:2;">
+                    <button onclick="searchBook()" style="flex:1;">Search</button>
+                </div>
                 <div id="bookResult"></div>
             `);
         }
-
         function searchBook() {
             let book = document.getElementById("bookSearch").value;
+            if(!book) return;
             document.getElementById("bookResult").innerHTML = `
-                <div class="info">
-                    📖 Book: <b>${book}</b><br>
-                    ✍️ Author: Demo Author<br>
-                    📍 Shelf: CSE-A-12<br>
-                    🟢 Status: Available
+                <div class="info" style="border-left: 4px solid green;">
+                    📖 <b>Title:</b> ${book}<br>
+                    📍 <b>Location:</b> Shelf CSE-A-12<br>
+                    🟢 <b>Status:</b> 3 Copies Available for issue
                 </div>
             `;
-        }
-
-        /* COMPLAINT */
-        function showComplaint() {
-            openModal("🛠️ Smart Complaint System", `
-                <input id="complaintName" placeholder="Your Name">
-                <input id="complaintLocation" placeholder="Location">
-                <textarea id="complaintText" placeholder="Describe your problem"></textarea>
-                <button onclick="submitComplaint()">Submit Complaint</button>
-                <p id="complaintResult" style="color:green; font-weight:bold;"></p>
-            `);
-        }
-
-        function submitComplaint() {
-            let id = "CMP-" + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById("complaintResult").innerHTML = `
-                <br>✅ Complaint Registered!<br>Complaint ID: <b>${id}</b><br>Status: <b>Pending</b>
-            `;
-        }
-
-        /* BUS */
-        function showBus() {
-            openModal("🚌 College Bus Tracking", `
-                <div class="info">🚌 Route 01<br>College → Dharamshala<br>Status: 🟢 On Route</div>
-                <div class="info">🚌 Route 02<br>College → Kangra<br>Status: 🟢 On Time</div>
-                <div class="info">🚌 Route 03<br>College → Main Market<br>Status: 🟡 10 min Delay</div>
-            `);
-        }
-
-        /* CANTEEN */
-        function showCanteen() {
-            openModal("🍔 Smart Canteen", `
-                <div class="info">🍛 Rajma Rice — ₹60</div>
-                <div class="info">🥪 Veg Sandwich — ₹40</div>
-                <div class="info">🍜 Noodles — ₹50</div>
-                <div class="info">☕ Tea — ₹15</div>
-                <div class="info">🥤 Cold Drink — ₹30</div>
-                <p style="margin-top:10px;"><b>⏰ Timing:</b> 9:00 AM – 5:00 PM</p>
-            `);
-        }
-
-        /* FACULTY */
-        function showFaculty() {
-            openModal("👨‍🏫 Faculty Information", `
-                <div class="info"><b>CSE Department</b><br>Head of Department<br>Room: Block A</div>
-                <div class="info"><b>Programming Faculty</b><br>Department of Computer Science</div>
-                <div class="info"><b>Data Structures Faculty</b><br>Department of Computer Science</div>
-            `);
-        }
-
-        /* NOTICES */
-        function showNotices() {
-            openModal("📢 Notices & Events", `
-                <div class="info">📢 Engineering Day — Coming Soon</div>
-                <div class="info">📢 Internal Assessment Schedule Released</div>
-                <div class="info">📢 Coding Competition Registration Open</div>
-            `);
-        }
-
-        /* EMERGENCY */
-        function emergency() {
-            openModal("🚨 Emergency SOS", `
-                <div class="info" style="border-left: 4px solid red;">🚨 Emergency: <b>112</b></div>
-                <div class="info" style="border-left: 4px solid red;">👮 Security: <b>100</b></div>
-                <div class="info" style="border-left: 4px solid red;">🚑 Ambulance: <b>108</b></div>
-                <br>
-                <button style="background:red;" onclick="alert('Emergency alert sent!')">🚨 SEND SOS</button>
-            `);
         }
     </script>
 </body>
